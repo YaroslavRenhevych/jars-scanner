@@ -33,6 +33,7 @@ public class Jdeprscan {
             "java/util/jar/Pack200",
             "Pack200",
             "netscape/javascript/JSObject::getWindow",
+            "netscape/javascript/JSObject.getWindow:(Ljava/applet/Applet;)",
             "netscape/javascript/JSObject",
             "traceInstructions",
             "traceMethodCalls",
@@ -57,6 +58,7 @@ public class Jdeprscan {
             "checkMemberAccess",
             "checkSystemClipboardAccess",
             "checkTopLevelWindow",
+            "java/lang/SecurityManager::checkTopLevelWindow",
             "runFinalizersOnExit",
             "Thread.destroy",
             "Thread:destroy",
@@ -65,7 +67,6 @@ public class Jdeprscan {
             "Thread:stop",
             "Thread::stop",
             "com/sun/java/browser/plugin2/DOM",
-            "plugin2",
             "sun/plugin/dom/DOMObject",
             "DOMObject",
 
@@ -248,10 +249,57 @@ public class Jdeprscan {
     );
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        String folder = "/path/to/folder/with/jars";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/release/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/nonrelease/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/code/cef-main/CEF/CEFBase/EJBServer/build/jar/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/code/cef-main/CEF/CEFBase/webclient/WebContent/WEB-INF/lib/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/code/cef-main/CEF/CEFBase/webclient/WebContent/applet-lib/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/cef-main-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/build/cef-main/CuramEar/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/creole-main-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/cefwidgets-main-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/bizinf-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/build/cefwidget/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/build/creole/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/build/bizinf/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/buildable-bizinf-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/buildable-cefwidgets-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/buildable-creole-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/buildable-cef-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/CuramJDE_7_0_${jde.pack.build.number}/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/installer-libs/wars/ClientModule-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/installer-libs/wars/ClientModuleWAS-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/installer-libs/jars/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/installer-libs/ears/CitizenPortal/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/installer-libs/ears/Curam_Read_Only/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/installer-libs/ears/Curam/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/installer-libs/ears/CuramNoAppConfig/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/installer-libs/ears/NetWeaverCuram/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/installer-libs/ears/SearchServer/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/buildable-cwc-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/buildable-cfss-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/buildable-hcr-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/test/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/buildable-SampleContentPack-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/standalone-compiler/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/buildable-spmentmods-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/buildable-ui-components-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/buildable-solutions-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/buildable-word-integration-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/buildable-pfmtools-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/spmentmods-webclient-webcontent-libs/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/test/";
+        //String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/buildable-ti/";
+        String folder = "/Users/Yaroslav_Renhevych/WTSN/libs/TI/releasePlusNonrelease/";
         File directoryPath = new File(folder);
         List<String> fileNames = Stream.of(Objects.requireNonNull(directoryPath.list()))
+                .filter(fileName -> !fileName.contains(" 2.jar"))
+                .filter(fileName -> !fileName.contains(" 3.jar"))
+                .filter(fileName -> !fileName.contains(" 4.jar"))
+                .filter(fileName -> !fileName.contains(" 5.jar"))
+                .filter(fileName -> !fileName.contains(" 6.jar"))
                 .filter(fileName -> !fileName.equals(".DS_Store"))
+                .filter(fileName -> !fileName.equals("ojdbc8.jar"))
                 .sorted()
                 .toList();
 
@@ -268,6 +316,15 @@ public class Jdeprscan {
         for (String fileName : fileNames) {
             Set<String> outputLines = new TreeSet<>();
             Set<String> removedAPIUsages = new TreeSet<>();
+
+/*            IntStream.range(8, 18)
+                    .parallel()
+                    .mapToObj(javaVersion -> {
+
+                    })
+                    .flatMap(Set::stream)
+                    .filter(str -> removedAPIs.stream().anyMatch(str::contains))
+                    .collect(Collectors.toSet());*/
 
             for (int javaVersion : javaVersions) {
                 System.out.println("File #" + fileNames.indexOf(fileName) + ": " + fileName + " for java " + javaVersion);
@@ -326,4 +383,35 @@ public class Jdeprscan {
         bw.write("END");
         bw.close();
     }
+
+
+    /*        ProcessBuilder processBuilder = new ProcessBuilder();
+        processBuilder.command("bash", "-c", "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jdeprscan --release 17 /Users/Yaroslav_Renhevych/WTSN/code/ti-main/TI/lib/release/ant-contrib/ant-contrib.jar");
+        try {
+
+            Process process = processBuilder.start();
+            int exitVal = process.waitFor();
+            if (exitVal == 0) {
+                System.out.println("Success!");
+
+            } else {
+                System.out.println("!!!!!!!!!!!!!!!!!");
+            }
+            StringBuilder output = new StringBuilder();
+
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(process.getInputStream()));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output.append(line + "\n");
+            }
+
+            System.out.println(output);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
 }
